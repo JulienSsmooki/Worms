@@ -21,14 +21,76 @@ Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Bui
 Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
 Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll (this message is harmless)
 Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-- Completed reload, in  0.027 seconds
+- Completed reload, in  0.028 seconds
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   23.21.13.8813
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.034 seconds
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   23.21.13.8813
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.025 seconds
 Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.222895 ms
+UnloadTime: 0.948043 ms
+<RI> Initialized touch support.
+UnloadTime: 0.959424 ms
+<RI> Initialized touch support.
+UnloadTime: 1.161722 ms
 OnStatusChanged: Connect current State: ConnectingToNameServer
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -93,6 +155,141 @@ OnEvent: Event 230.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+OnStatusChanged: Connect current State: ConnectingToNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: ConnectingToNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Received your UserID from server. Updating local value to: ju1 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: Authenticating
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 226.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinLobby()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 229: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 230.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OOEvenEv enent E226. 26 
+(
+Fi
+lenamname::/C:buildslave/unnity/bbuuild/artifacts/generate/c/mmcommonti/runtbugBinbugBgnding.gege.c.cp Line: 51)
+
+
+
+OnStatusChanged: Connect current State: ConnectingToNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: ConnectingToNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Received your UserID from server. Updating local value to: ju2 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: Authenticating
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 226.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinLobby()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 229: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 230.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 OpCreateRoom()
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
@@ -105,11 +302,11 @@ SocketTcp.Disconnect()
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-OnStatusChanged: Disconnect current State: DisconnectingFromMasterserver
+SocketTcp.Disconnect()
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-SocketTcp.Disconnect()
+OnStatusChanged: Disconnect current State: DisconnectingFromMasterserver
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
@@ -157,24 +354,432 @@ OperationResponse 252: ReturnCode: 0.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-OnEvent: Event 255.
+OnEvOnnEvent:t  Ev.t 29(
+Fi
+lename: C:/Cu/ldblavildslavy//nitybbiuild/arfafacts/gnerateted/common/runtimeDeDeuguBindings..gen.cpp Line:  51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 28ee8 -> priority: 1 
+  Thread -> id: 2706c -> priority: 1 
+OOEveEvent: Even2t 2
+26
+.
+ 
+(Filename: C:/buildslavet/unity/burld/iaacts/gets/erated/ted/con/ronntruitime/DebugBindings.gen.cp p Liine: 51
+
+
+
+OOEnEvent: Event 229
+.
+
+ lename: C:/bu:ildslaveaveitny/buiuil//artifaacttsgeneraeredtecommon/runtime/D/DegBindings.geng.nccpp Line: 51))
+
+
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1080 (ID=0x1b80)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   23.21.13.8813
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.025 seconds
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Ssmooki\Documents\GitRepos\Worms\Build\WormsLike_Build_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+OnEvent: EventO226n
+ 
+vFieenam:  Ev/enit s2a2e6.ity
+/bulild/ar C:/buildslaveated/cyommon//rrtntfamc/DebugBerated/common/runtime/Debu
+g
+Bindings.gen.cpp Line: 51)
+
+UnloadTime: 1.042506 ms
+OnStatusChanged: Connect current State: ConnectingToNameServer
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 1.820686 ms
+OnStatusChanged: EncryptionEstablished current State: ConnectingToNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Received your UserID from server. Updating local value to: ju3 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromNameServer
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: Authenticating
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 226.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinLobby()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 229: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 230.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpCreateRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 227: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: ConnectedToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpCreateRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 227: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
 OpSetPropertiesOfRoom()
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
-Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 392.
-Total: 0.314402 ms (FindLiveObjects: 0.024753 ms CreateObjectMapping: 0.019632 ms MarkObjects: 0.227621 ms  DeleteObjects: 0.037273 ms)
+OpSetPropertiesOfRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
 OperationResponse 252: ReturnCode: 0.
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
+OperationResponse 252: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 229.
+ 
+(OilnEvent: Event 229.e uni
+(ty/build/ar:/buildslave/unity/build/artifacts/generated/commo.c/ppntime/Deb1ug
+B
+indings.gen.cpp Line: 51)
+
+OnEvent: EOennEven.
+t
+: Event 2:6.
+ C
+:/buildmslav://uuilty/buield/ity/bfald/argefncte/gened/common/ruotimemonerbugBintimgs.gen.cpp Line: 51)
+
+pp Line: 51)
+
+OpJoinRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 226: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: ConnectedToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 226: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpSetPropertiesOfRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpSetPropertiesOfRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperatioORespvontse Event 253.
+ ode: 0.me:
+ C:/buildslavebuildtylaveildnity/bfacts/generates//commrated/come/Dn/rugBine/DgebugBindi nins.gen.cp
+p
+ Line: 51)
+
+OnEvent: Ovenr ation
+R
+eFilensame: C:/buildsladv: 0uni
+t
+(/bulen/art fC:/b/ilenerated/comyo//bunilmd/Debuifiacitss/geencer atne: 51)
+o
+n/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 229.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 226: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Disconnect current State: DisconnectingFromMasterserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SocketTcp.Disconnect()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: Connect current State: ConnectingToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnStatusChanged: EncryptionEstablished current State: ConnectedToGameserver
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpAuthenticate()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperationResponse 230: ReturnCode: 0.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpJoinRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OOEvnEt: Et:n Even.
+ 5
+5Fil
+ a(e: C:naumed: C:/bunilydsuladvartufnity/build/artifacts/generated/common/runtime/DebugBindings.)encp Line: 51)O
+
+perationResponse 226O peSernPrope: 0ie
+s
+Ofilename:
+ :/buiednlave/unity/blids/lrtifacts/gebunlderrated/common/runtimeomDeon/runOiiS/tsrgueB.ndingLs.g:n 5cpp
+( 
+Line: : C:/
+b
+uildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnEvent: Event 255.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpSetPropertiesOfRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnpventraEvoeOnEvent: E.en 
+ 2
+(3urn
+eo
+ade:  :mbu
+ :/bulledamity/:unity/dutiav/t/agentfaytsb/ildnar/ifamtcom/enertutetimecDoBignindings.g.nDncupBp ding:. 51n
+
+pp Line: 51)
+
+OnnEvent: Event 25..O
+ p
+(Firannie:anCe/bpi/ldsl252:uni uenitn/obdelid/artif 0.a/e
+gFeimlen/munt:meon/ruitdildinDsbnutgycindild/.:tinf)
+ps/genera: 51)
+
+mmon/runtime/DebugBindings.gen.cpp Line: 51)
+
+OperatioORnEvense  252nt O5n.v o
+(eF  lve
+e 2aml:e
+na
+/buiendslavC:/buityslavelu/nittyatbsfaldt/ar/ngrated/cnmrmanmer/nuntmme/DbuggiminiDebus.Bisnginp.cppge:n5nc:
+ 
+p Lie:
+51)
+
+UnloaUing 5UUnloadinnu5edizedediSiee (leiieli eS reial now lioaded: 0)l
+lesade : 0)
+loaded: 0)
+UnloadTime: 1.530469 ms
+UnloadTime: 1.880152 ms
+UnloadTime: 2.199960 ms
+OpSetPropertiesOfRoom()
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+
+Unloading 18 u unsed Assetetto treduce me morory usage. Loaded Objects now: 393.
+Totaal:l0: 0618795 8 s (F(FidLiveObjects:  0.040118 ms CreateObbjectapapping: 0.034996 ms MarkObjects: 0.258350 ms  DelleteeOjectst 0: 30.20 m32)8 
+ms)
+
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 393.
+Total: 0.324360 ms (FindLiveObjects: 0.035850 ms CreateObjectMapping: 0.019347 ms MarkObjects: 0.238433 ms  DeleteObjects: 0.028737 ms)
+
+OOnEvOtpervEvont 2e5p.o
+ n
+s
+e iee:nmRatCmnCb od/uui l.s
+ a(Felenimt: /buildiatrtifas/gnigy/ruriledc/aroimorcuuntimeDebuugeinndigmo.gruntimp Dinb: B55)
+)
+gs
+.
+gen.cpp Line: 51)
+
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 28a28 -> priority: 1 
-  Thread -> id: 28a2c -> priority: 1 
+  Thread -> id: 280a4 -> priority: 1 
+  Thread -> id: 23998 -> priority: 1 
+OnEvent: Event 254.
+ 
+(Filename: C:/OunEvent: Eunity/build
+ 
+(Filename: C:/buildslave/ununtime/Dbubild/artifa.ctnscpp Line: 51)
+
+on/runtime/DebugBindings.gen.cpp Line: 51)
+
+HandleEventLeave for player IDH a nvdlaeve:ntLeave 254r p(aBeytIe) 25ev=Leave:[])System.Int32[], (Byte)233=([Booleaemn)True,],( (Byte)23(In(3Boole
+an
+)Firle, ame: BCte)254=dsInt32)2}
+ 
+(Fille/aamte:act://guinedsatavd//uomiton/ruild/a/DifacgBigndings.gen.cpon Lin/: un1)ie/
+DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 27454 -> priority: 1 
+  Thread -> id: 271a0 -> priority: 1 
+OnEvent: Event 254.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+HandleEventLeave for player ID: 3 evLeave: Event 254: {(Byte)252=(Int32[])System.Int32[], (Byte)233=(Boolean)True, (Byte)254=(Int32)3}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 28e6c -> priority: 1 
+  Thread -> id: 28dec -> priority: 1 

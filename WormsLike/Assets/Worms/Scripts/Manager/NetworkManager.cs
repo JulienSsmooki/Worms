@@ -26,6 +26,8 @@ public class NetworkManager : Photon.PunBehaviour
 
     public Text textTimerBeforeLaunch;
     public Text textRoomName;
+
+    public List<Text> listPlayerName = new List<Text>();
     #endregion
 
 
@@ -40,6 +42,8 @@ public class NetworkManager : Photon.PunBehaviour
     float timerBeforeLaunch = 10.0f;
 
     Hashtable hashSet;
+    
+    string playername = "PlayerName";
     #endregion
 
 
@@ -54,18 +58,32 @@ public class NetworkManager : Photon.PunBehaviour
 
     void Update()
     {
-        if (PhotonNetwork.inRoom && PhotonNetwork.room.PlayerCount == (int)ToG)
+        if (PhotonNetwork.inRoom)
         {
-            if (timerBeforeLaunch > 0.0f)
-                timerBeforeLaunch -= Time.deltaTime;
-            else
-                timerBeforeLaunch = 0.0f;
+            hashSet = PhotonNetwork.room.CustomProperties;
 
-            textTimerBeforeLaunch.text = "Time before starting : " + (int)timerBeforeLaunch;
-
-            if (timerBeforeLaunch <= 0.0f)
+            for (int i = 1; i < PhotonNetwork.room.PlayerCount + 1; i++)
             {
-                PhotonNetwork.LoadLevel("GameRoom" + (int)ToG);
+                if (!listPlayerName[i - 1].gameObject.activeSelf)
+                {
+                    listPlayerName[i - 1].gameObject.SetActive(true);
+                    listPlayerName[i - 1].text = (string)hashSet[(playername + i.ToString())];
+                }
+            }
+
+            if (PhotonNetwork.room.PlayerCount == (int)ToG)
+            {
+                if (timerBeforeLaunch > 0.0f)
+                    timerBeforeLaunch -= Time.deltaTime;
+                else
+                    timerBeforeLaunch = 0.0f;
+
+                textTimerBeforeLaunch.text = "Time before starting : " + (int)timerBeforeLaunch;
+
+                if (timerBeforeLaunch <= 0.0f)
+                {
+                    PhotonNetwork.LoadLevel("GameRoom" + (int)ToG);
+                }
             }
         }
     }
@@ -86,12 +104,6 @@ public class NetworkManager : Photon.PunBehaviour
         LogFeedback("Connecting...");
         PhotonNetwork.ConnectUsingSettings(gameVersion);
         
-        if (PhotonNetwork.connected)
-        {
-            //LogFeedback("Joining Room...");
-            //PhotonNetwork.JoinOrCreateRoom("", new RoomOptions(), TypedLobby.Default);
-           //PhotonNetwork.JoinRandomRoom();
-        }
     }
 
     public void SearchGame()
@@ -111,14 +123,7 @@ public class NetworkManager : Photon.PunBehaviour
                 option.IsOpen = true;
                 option.IsVisible = true;
                 option.PlayerTtl = 5 * 60 * 1000;
-                //hashSet = new Hashtable(5)
-                //{
-                //    { "PlayerName1" , PhotonNetwork.room.CustomProperties["PlayerName1"] },
-                //    { "PlayerName2" , PhotonNetwork.room.CustomProperties["PlayerName2"] },
-                //    { "PlayerName3" , PhotonNetwork.room.CustomProperties["PlayerName3"] },
-                //    { "PlayerName4" , PhotonNetwork.room.CustomProperties["PlayerName4"] },
-                //    { "TypeOfGame", PhotonNetwork.room.CustomProperties["TypeOfGame"] }
-                //};
+               
                 hashSet = new Hashtable();
                 hashSet["TypeOfGame"] = ToG;
                 hashSet["PlayerName1"] = "";
@@ -195,12 +200,39 @@ public class NetworkManager : Photon.PunBehaviour
     public override void OnJoinedRoom()
     {
         textRoomName.text = PhotonNetwork.room.Name.Substring(1);
-
+        
         if (hashSet != null)
         {
+            hashSet[playername + PhotonNetwork.room.PlayerCount] = PhotonNetwork.playerName;
+
             PhotonNetwork.room.SetCustomProperties(hashSet);
         }
-        
+        else
+        {
+            hashSet = PhotonNetwork.room.CustomProperties;
+            hashSet[playername + PhotonNetwork.room.PlayerCount] = PhotonNetwork.playerName;
+
+            PhotonNetwork.room.SetCustomProperties(hashSet);
+        }
+
+    }
+
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        base.OnPhotonPlayerConnected(newPlayer);
+        if (hashSet != null)
+        {
+            hashSet[playername + PhotonNetwork.room.PlayerCount] = newPlayer.NickName;
+
+            PhotonNetwork.room.SetCustomProperties(hashSet);
+        }
+        else
+        {
+            hashSet = PhotonNetwork.room.CustomProperties;
+            hashSet[playername + PhotonNetwork.room.PlayerCount] = newPlayer.NickName;
+
+            PhotonNetwork.room.SetCustomProperties(hashSet);
+        }
     }
 
     #endregion
