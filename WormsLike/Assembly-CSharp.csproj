@@ -194,6 +194,9 @@
      <Compile Include="Assets\PhotonChatApi\ChatState.cs" />
      <Compile Include="Assets\PhotonChatApi\ChatUserStatus.cs" />
      <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
+     <Compile Include="Assets\Worms\Scripts\Manager\MenuManager.cs" />
+     <Compile Include="Assets\Worms\Scripts\Manager\NetworkManager.cs" />
+     <Compile Include="Assets\Worms\Scripts\Menu\InputFieldPseudo.cs" />
      <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\Photon Unity Networking\link.xml" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
