@@ -194,6 +194,9 @@
      <Compile Include="Assets\PhotonChatApi\ChatState.cs" />
      <Compile Include="Assets\PhotonChatApi\ChatUserStatus.cs" />
      <Compile Include="Assets\PhotonChatApi\IChatClientListener.cs" />
+     <Compile Include="Assets\Worms\Scripts\Game\Missile.cs" />
+     <Compile Include="Assets\Worms\Scripts\Game\PlayerController.cs" />
+     <Compile Include="Assets\Worms\Scripts\Manager\GameManager.cs" />
      <Compile Include="Assets\Worms\Scripts\Manager\MenuManager.cs" />
      <Compile Include="Assets\Worms\Scripts\Manager\NetworkManager.cs" />
      <Compile Include="Assets\Worms\Scripts\Menu\InputFieldPseudo.cs" />

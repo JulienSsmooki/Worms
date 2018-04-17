@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System.Linq;
 
 public enum TypeOfGame
 {
@@ -28,22 +30,29 @@ public class NetworkManager : Photon.PunBehaviour
     public Text textRoomName;
 
     public List<Text> listPlayerName = new List<Text>();
+    
+    public Hashtable hashSet;
+
     #endregion
 
 
 
     #region Private Variables
+
     bool isConnecting;
+
+    bool isGameStarted = false;
 
     string gameVersion = "1";
 
     List<string> listNameRoomOpenOfType = new List<string>();
 
-    float timerBeforeLaunch = 10.0f;
-
-    Hashtable hashSet;
-    
+    float timerBeforeLaunch = 1.0f;
+        
     string playername = "PlayerName";
+
+    int NbrWormsPT = 1;
+    
     #endregion
 
 
@@ -54,20 +63,47 @@ public class NetworkManager : Photon.PunBehaviour
     {
         PhotonNetwork.autoJoinLobby = true;
         PhotonNetwork.automaticallySyncScene = true;
+
+        SceneManager.sceneLoaded += OnStartGame;
+        
+        DontDestroyOnLoad(this);
+    }
+    
+    public void OnStartGame(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.buildIndex > 0)//Is in game scene
+        {
+            isGameStarted = true;
+        }
+        else
+        {
+            isGameStarted = false;
+        }
     }
 
     void Update()
     {
-        if (PhotonNetwork.inRoom)
+        if (PhotonNetwork.inRoom && !isGameStarted)
         {
             hashSet = PhotonNetwork.room.CustomProperties;
 
-            for (int i = 1; i < PhotonNetwork.room.PlayerCount + 1; i++)
+            for (int i = 1; i < 5; i++)
             {
-                if (!listPlayerName[i - 1].gameObject.activeSelf)
+                if (i < PhotonNetwork.room.PlayerCount + 1)
                 {
-                    listPlayerName[i - 1].gameObject.SetActive(true);
+                    if (!listPlayerName[i - 1].gameObject.activeSelf)
+                    {
+                        listPlayerName[i - 1].gameObject.SetActive(true);
+                    }
                     listPlayerName[i - 1].text = (string)hashSet[(playername + i.ToString())];
+                }
+                else
+                {
+                    if (listPlayerName[i - 1].gameObject.activeSelf)
+                    {
+                        listPlayerName[i - 1].text = "";
+                        listPlayerName[i - 1].gameObject.SetActive(false);
+                    }
                 }
             }
 
@@ -84,6 +120,11 @@ public class NetworkManager : Photon.PunBehaviour
                 {
                     PhotonNetwork.LoadLevel("GameRoom" + (int)ToG);
                 }
+            }
+            else
+            {
+                timerBeforeLaunch = 1.0f;
+                textTimerBeforeLaunch.text = "Time before starting : XX";
             }
         }
     }
@@ -126,6 +167,7 @@ public class NetworkManager : Photon.PunBehaviour
                
                 hashSet = new Hashtable();
                 hashSet["TypeOfGame"] = ToG;
+                hashSet["NbrWorms"] = NbrWormsPT;
                 hashSet["PlayerName1"] = "";
                 hashSet["PlayerName2"] = "";
                 hashSet["PlayerName3"] = "";
@@ -161,7 +203,15 @@ public class NetworkManager : Photon.PunBehaviour
     {
         ToG = (TypeOfGame)(change.value + 2);
     }
-    
+
+    public void SetWPT(Dropdown change)
+    {
+        NbrWormsPT = int.Parse(change.options[change.value].text);
+
+        hashSet["NbrWorms"] = NbrWormsPT;
+        PhotonNetwork.room.SetCustomProperties(hashSet);
+    }
+
     void LogFeedback(string message)
     {
         if (feedbackText == null)
@@ -170,6 +220,21 @@ public class NetworkManager : Photon.PunBehaviour
         }
         
         feedbackText.text += System.Environment.NewLine + message;
+    }
+
+    public void BackToLobby()
+    {
+        if(PhotonNetwork.LeaveRoom())
+            controlPanel.Active_Co_Room();
+    }
+
+    public void BackToConnect()
+    {
+        if (PhotonNetwork.LeaveLobby())
+        {
+            feedbackText.text = "Info :";
+            controlPanel.Active_Co_Serv();
+        }
     }
 
     #endregion
@@ -215,6 +280,9 @@ public class NetworkManager : Photon.PunBehaviour
             PhotonNetwork.room.SetCustomProperties(hashSet);
         }
 
+        if (PhotonNetwork.isMasterClient)
+            controlPanel.Active_Worms();
+
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
@@ -234,6 +302,31 @@ public class NetworkManager : Photon.PunBehaviour
             PhotonNetwork.room.SetCustomProperties(hashSet);
         }
     }
+
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        base.OnPhotonPlayerDisconnected(otherPlayer);
+
+        if(PhotonNetwork.isMasterClient)
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                if ((string)hashSet[playername + i] == otherPlayer.NickName)
+                {
+                    hashSet[playername + i] = "";
+                    for (int j = 4; j > i; j--)
+                    {
+                        if ((string)hashSet[playername + j] != "")
+                            hashSet[playername + j] = hashSet[playername + i];
+
+                    }
+                    PhotonNetwork.room.SetCustomProperties(hashSet);
+                    i = 5;
+                }
+            }
+        }
+    }
+    
 
     #endregion
 }

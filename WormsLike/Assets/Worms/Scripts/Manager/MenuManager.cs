@@ -12,10 +12,11 @@ public class MenuManager : MonoBehaviour {
     public Text textPlayerName;
 
     public GameObject Panel_Room;
-
+    public GameObject TextWormsTeam;
+    public GameObject DropDownWormsTeam;
 
     public GameObject Panel_Option;
-
+    
     private void ResetPanel()
     {
         Panel_Co_Serv.SetActive(false);
@@ -50,4 +51,10 @@ public class MenuManager : MonoBehaviour {
         Panel_Option.SetActive(true);
     }
     
+
+    public void Active_Worms()
+    {
+        TextWormsTeam.SetActive(true);
+        DropDownWormsTeam.SetActive(true);
+    }
 }
