@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
     #region Private Variables
 
     float maxTimerSelect = 5.0f;
-    float maxTimerAction = 5.0f;
+    float maxTimerAction = 50.0f;
 
     NetworkManager NetManager;
 
