@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 2.0f)] public float scaleDeplacement = 1.0f;
 
     public float lifePoint = 100.0f;
+    public bool isAlive = true;
 
+    public Text lifeText;
     #endregion
     
 
@@ -44,12 +47,15 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        if (int.Parse(lifeText.text) != lifePoint)
+            lifeText.text = lifePoint.ToString();
+
         if(isControledWorms)
         {
             //Fire
             if(Input.GetButton("Jump"))
             {
-                dirMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                dirMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - (transform.position + Vector3.up * 0.2f);
                 dirMouse.Normalize();
 
                 if (!isOnFire)
@@ -99,13 +105,22 @@ public class PlayerController : MonoBehaviour {
             }
 
         }
+
+        //Update life
+        if(lifePoint <= 0)
+        {
+            isAlive = false;
+            transform.position = new Vector3(10000, 10000);
+            rb2D.bodyType = RigidbodyType2D.Kinematic;
+            rb2D.velocity = Vector3.zero;
+        }
     }
 
     
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if(Vector2.Dot( -transform.up  ,coll.contacts[0].point) > 0)
+        if(Vector2.Dot( -transform.up, coll.contacts[0].point) > 0)
             isGrounded = true;
     }
 

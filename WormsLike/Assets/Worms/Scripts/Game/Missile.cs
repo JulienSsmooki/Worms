@@ -11,12 +11,13 @@ public class Missile : MonoBehaviour {
 
     public Rigidbody2D rb2D;
     public BoxCollider2D col2D;
+    public PhotonView view;
     #endregion
 
 
     #region Private Variables
 
-    PhotonView view;
+    GameObject terrain;
 
     #endregion
 
@@ -25,6 +26,7 @@ public class Missile : MonoBehaviour {
 
     private void Awake()
     {
+        terrain = GameObject.FindGameObjectWithTag("Ground");
         view = GetComponent<PhotonView>();
         rb2D = GetComponent<Rigidbody2D>();
         col2D = GetComponent<BoxCollider2D>();
@@ -50,54 +52,85 @@ public class Missile : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Ground")
         {
-            //Destroy(collision.gameObject.GetComponent<PolygonCollider2D>());
-            
-            UpdateTexture(coll.gameObject.GetComponent<SpriteRenderer>().sprite);
+            Vector3 impactPoint = coll.contacts[0].point;
 
-            PhotonNetwork.Destroy(view);
+            view.RPC("UpdateTexture", PhotonTargets.AllBuffered, impactPoint);
+
         }
     }
-
-    private void UpdateTexture(Sprite terrain)
+    
+    public void TutchingWorms(Vector3 _impactPoint, float _pixelsPerUnit)
     {
-        Texture2D tex = terrain.texture;
-
-        Vector3 pos = transform.position;
-
-        pos.x -= tex.width / 2.0f;
-        pos.y -= tex.height / 2.0f;
-
-        pos.x *= tex.width;
-        pos.y *= tex.height;
-
-        pos.x *= tex.texelSize.x;
-        pos.y *= tex.texelSize.y;
-
-        pos.x = Mathf.Abs(pos.x);
-        pos.y = Mathf.Abs(pos.y);
-        
-
-        Debug.Log(pos.x + " | " + pos.y);
-
-        for (int Y = (int)pos.y - 30; Y < (int)pos.y + 30; Y++)
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(_impactPoint.x,_impactPoint.y), 70.0f / _pixelsPerUnit);
+        if (hitColliders != null)
         {
-            for (int X = (int)pos.x - 30; X < (int)pos.x + 30; X++)
+            foreach (Collider2D collider in hitColliders)
             {
-                Color Couleur = tex.GetPixel(X, Y);
-                if (Couleur.a != 0)
+                if (collider.gameObject.tag == "Player")
                 {
-                    tex.SetPixel(X, Y, Color.clear);
+                    PlayerController pc = collider.gameObject.GetComponent<PlayerController>();
+                    if(Vector3.Magnitude(collider.gameObject.transform.position - _impactPoint) < ((70.0f / _pixelsPerUnit)/ 2.0f)) //Impacte proche
+                    {
+                        pc.lifePoint -= 50.0f;
+                    }
+                    else //Impact éloigné
+                    {
+                        pc.lifePoint -= 25.0f;
+                    }
                 }
             }
         }
-        tex.Apply();
     }
 
     #endregion
 
 
-    #region Photon.PunBehaviour CallBacks
+    #region Photon.PunBehaviour RPCs
 
+    [PunRPC]
+    private void UpdateTexture(Vector3 _impactPoint)
+    {
+        Destroy(terrain.GetComponent<PolygonCollider2D>());
+
+        Sprite spriteTerrain = terrain.GetComponent<SpriteRenderer>().sprite;
+
+        Texture2D tex = spriteTerrain.texture;
+
+        Vector3 pos = _impactPoint;
+
+        pos *= spriteTerrain.pixelsPerUnit;
+
+        pos.x += tex.width / 2.0f;
+        pos.y += tex.height / 2.0f;
+
+        TutchingWorms(_impactPoint, spriteTerrain.pixelsPerUnit);
+
+        int offset = 80;
+        for (int Y = (int)pos.y - offset; Y < (int)pos.y + offset; Y++)
+        {
+            for (int X = (int)pos.x - offset; X < (int)pos.x + offset; X++)
+            {
+                Color Couleur = tex.GetPixel(X, Y);
+                if (Couleur.a != 0)
+                {
+                    float Sqrt = Mathf.Sqrt(((Y - pos.y) * (Y - pos.y)) + ((X - pos.x) * (X - pos.x)));
+
+                    if (Sqrt < 70)
+                        tex.SetPixel(X, Y, Color.black);
+                    if (Sqrt < 65)
+                        tex.SetPixel(X, Y, Color.clear);
+
+                }
+            }
+        }
+        tex.Apply();
+
+        terrain.AddComponent<PolygonCollider2D>();
+
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
+        rb2D.velocity = Vector2.zero;
+        Destroy(gameObject);
+    }
 
     #endregion
 }

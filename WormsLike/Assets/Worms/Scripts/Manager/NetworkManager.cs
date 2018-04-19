@@ -18,31 +18,29 @@ public enum TypeOfGame
 public class NetworkManager : Photon.PunBehaviour
 {
     #region Public Variables
-    public MenuManager controlPanel;
-
-    public Text feedbackText;
-
+    
     public byte maxPlayersPerRoom = 4;
 
     public TypeOfGame ToG = TypeOfGame._1vs1;
 
+    public List<Text> listPlayerName = new List<Text>();
+
     public Text textTimerBeforeLaunch;
     public Text textRoomName;
 
-    public List<Text> listPlayerName = new List<Text>();
-    
     public Hashtable hashSet;
 
+    public bool isGameStarted = false;
+    public int NbrWormsPT = 1;
     #endregion
 
 
 
     #region Private Variables
-
+    MenuManager controlPanel;
+    
     bool isConnecting;
-
-    bool isGameStarted = false;
-
+    
     string gameVersion = "1";
 
     List<string> listNameRoomOpenOfType = new List<string>();
@@ -50,8 +48,6 @@ public class NetworkManager : Photon.PunBehaviour
     float timerBeforeLaunch = 1.0f;
         
     string playername = "PlayerName";
-
-    int NbrWormsPT = 1;
     
     #endregion
 
@@ -65,7 +61,9 @@ public class NetworkManager : Photon.PunBehaviour
         PhotonNetwork.automaticallySyncScene = true;
 
         SceneManager.sceneLoaded += OnStartGame;
-        
+
+        controlPanel = FindObjectOfType<MenuManager>();
+
         DontDestroyOnLoad(this);
     }
     
@@ -74,10 +72,6 @@ public class NetworkManager : Photon.PunBehaviour
         if(scene.buildIndex > 0)//Is in game scene
         {
             isGameStarted = true;
-        }
-        else
-        {
-            isGameStarted = false;
         }
     }
 
@@ -136,13 +130,10 @@ public class NetworkManager : Photon.PunBehaviour
 
     public void Connect()
     {
-        feedbackText.text = "Info :";
-        
         isConnecting = true;
-        
+
         controlPanel.Active_Co_Room();
 
-        LogFeedback("Connecting...");
         PhotonNetwork.ConnectUsingSettings(gameVersion);
         
     }
@@ -211,17 +202,7 @@ public class NetworkManager : Photon.PunBehaviour
         hashSet["NbrWorms"] = NbrWormsPT;
         PhotonNetwork.room.SetCustomProperties(hashSet);
     }
-
-    void LogFeedback(string message)
-    {
-        if (feedbackText == null)
-        {
-            return;
-        }
-        
-        feedbackText.text += System.Environment.NewLine + message;
-    }
-
+    
     public void BackToLobby()
     {
         if(PhotonNetwork.LeaveRoom())
@@ -232,7 +213,7 @@ public class NetworkManager : Photon.PunBehaviour
     {
         if (PhotonNetwork.LeaveLobby())
         {
-            feedbackText.text = "Info :";
+            PhotonNetwork.Disconnect();
             controlPanel.Active_Co_Serv();
         }
     }
@@ -248,17 +229,14 @@ public class NetworkManager : Photon.PunBehaviour
         
         if (isConnecting)
         {
-            LogFeedback("<Color=Blue>OnConnectedToMaster</Color>: Connected");
         }
     }
     
     public override void OnDisconnectedFromPhoton()
     {
-        LogFeedback("<Color=Red>OnDisconnectedFromPhoton</Color>: Disconnected");
-
         isConnecting = false;
 
-        controlPanel.Active_Co_Serv();
+        
 
     }
     
@@ -326,7 +304,14 @@ public class NetworkManager : Photon.PunBehaviour
             }
         }
     }
-    
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        if(isGameStarted)
+            PhotonNetwork.LoadLevel(0);
+
+    }
 
     #endregion
 }
