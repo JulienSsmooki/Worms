@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     public bool isAlive = true;
 
     public Text lifeText;
+    public GameObject feedTarget;
     #endregion
     
 
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour {
     
     Missile missileScript;
     Vector3 dirMouse = Vector3.zero;
-    float shootForce = 10.0f;
+    float shootForce = 1.0f;
 
     #endregion
 
@@ -55,8 +56,14 @@ public class PlayerController : MonoBehaviour {
             //Fire
             if(Input.GetButton("Jump"))
             {
+                if (shootForce < 10.0f)
+                    shootForce += Time.deltaTime * 2.5f;
+                else
+                    shootForce = 10.0f;
+
                 dirMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - (transform.position + Vector3.up * 0.2f);
                 dirMouse.Normalize();
+                dirMouse.z = 0.0f;
 
                 if (!isOnFire)
                 {
@@ -64,11 +71,21 @@ public class PlayerController : MonoBehaviour {
                     GameObject missile = PhotonNetwork.Instantiate("MissilePrefab", transform.position + Vector3.up * 0.2f, Quaternion.identity, 0);
                     missileScript = missile.GetComponent<Missile>();
                     missileScript.SetDirPui(dirMouse, shootForce);
+
+                    feedTarget.SetActive(true);
                 }
                 else
                 {
                     if(missileScript != null)
                         missileScript.SetDirPui(dirMouse, shootForce);
+
+                    feedTarget.transform.localPosition = Vector3.up * 20.0f;
+
+                    Quaternion rot = Quaternion.LookRotation(feedTarget.transform.forward, new Vector3(feedTarget.transform.forward.x, feedTarget.transform.forward.y, 0.0f) + dirMouse);
+                    feedTarget.transform.rotation = rot;
+
+                    feedTarget.transform.localPosition += dirMouse.normalized * (5.0f * shootForce);
+                    
                 }
             }
             else
@@ -95,11 +112,13 @@ public class PlayerController : MonoBehaviour {
                 {
                     if (missileScript != null)
                     {
+                        shootForce = 1.0f;
                         missileScript.rb2D.bodyType = RigidbodyType2D.Dynamic;
                         missileScript.col2D.enabled = true;
                         missileScript.Launch();
                         missileScript = null;
                     }
+                    feedTarget.SetActive(false);
                     isOnFire = false;
                 }
             }

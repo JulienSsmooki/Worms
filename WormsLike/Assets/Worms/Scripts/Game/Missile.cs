@@ -32,10 +32,18 @@ public class Missile : MonoBehaviour {
         col2D = GetComponent<BoxCollider2D>();
     }
 
+    private void Update()
+    {
+        if(rb2D.velocity.magnitude > 0.0f)
+        {
+            Quaternion rot = Quaternion.LookRotation(transform.forward, new Vector3(transform.forward.x + rb2D.velocity.x, transform.forward.y + rb2D.velocity.y, 0.0f));
+            transform.rotation = rot;
+        }
+    }
+
     public void SetDirPui(Vector3 _dir, float _pui)
     {
         direction = _dir;
-        direction.z = 0.0f;
         puissance = _pui;
 
         Quaternion rot = Quaternion.LookRotation(transform.forward, new Vector3(transform.forward.x, transform.forward.y, 0.0f) + direction);
