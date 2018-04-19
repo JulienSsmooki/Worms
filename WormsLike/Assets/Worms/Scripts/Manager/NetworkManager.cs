@@ -61,9 +61,7 @@ public class NetworkManager : Photon.PunBehaviour
         PhotonNetwork.automaticallySyncScene = true;
 
         SceneManager.sceneLoaded += OnStartGame;
-
-        controlPanel = FindObjectOfType<MenuManager>();
-
+        
         DontDestroyOnLoad(this);
     }
     
@@ -72,6 +70,11 @@ public class NetworkManager : Photon.PunBehaviour
         if(scene.buildIndex > 0)//Is in game scene
         {
             isGameStarted = true;
+            listPlayerName.RemoveRange(0, listPlayerName.Count);
+        }
+        else
+        {
+            controlPanel = FindObjectOfType<MenuManager>();
         }
     }
 
@@ -217,7 +220,7 @@ public class NetworkManager : Photon.PunBehaviour
             controlPanel.Active_Co_Serv();
         }
     }
-
+    
     #endregion
 
 

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 
     [Range(0.0f, 2.0f)] public float scaleDeplacement = 1.0f;
 
-    public float lifePoint = 100.0f;
+    public float lifePoint = 10.0f;
     public bool isAlive = true;
 
     public Text lifeText;
@@ -107,12 +107,15 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Update life
-        if(lifePoint <= 0)
+        if(lifePoint <= 0 && isAlive)
         {
+            isControledWorms = false;
             isAlive = false;
             transform.position = new Vector3(10000, 10000);
             rb2D.bodyType = RigidbodyType2D.Kinematic;
             rb2D.velocity = Vector3.zero;
+            GM.StopAllCoroutines();
+            GM.StartCoroutine(GM.WormsAreYouAlive());
         }
     }
 

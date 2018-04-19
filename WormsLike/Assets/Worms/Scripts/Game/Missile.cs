@@ -54,7 +54,7 @@ public class Missile : MonoBehaviour {
         {
             Vector3 impactPoint = coll.contacts[0].point;
 
-            view.RPC("UpdateTexture", PhotonTargets.AllBuffered, impactPoint);
+            view.RPC("UpdateTexture", PhotonTargets.All, impactPoint);
 
         }
     }

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
     #region Private Variables
 
-    float maxTimerSelect = 1.0f;
+    float maxTimerSelect = 5.0f;
     float maxTimerAction = 50.0f;
 
     NetworkManager NetManager;
@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour {
     PhotonView viewCamera;
     
     bool wasShoot = false;
-
-    bool isGameOver = false;
     
     GameObject arrow;
     #endregion
@@ -82,12 +80,11 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(WormsAreYouAlive());
     }
     
-    private IEnumerator WormsAreYouAlive()
+    public IEnumerator WormsAreYouAlive()
     {
-        bool anyoneAlive = false;
         do
         {
-            anyoneAlive = false;
+            bool anyoneAlive = false;
             if (localWormsPC != null && localWormsPC.Count > 0)
             {
                 foreach (PlayerController pc in localWormsPC)
@@ -95,146 +92,147 @@ public class GameManager : MonoBehaviour {
                     if (pc.isAlive)
                         anyoneAlive = true;
                 }
-                teamIsAlive = anyoneAlive;
             }
             else
             {
                 anyoneAlive = true;
             }
-            yield return new WaitForSeconds(1.0f);
-        } while (anyoneAlive);
+            teamIsAlive = anyoneAlive;
+            yield return new WaitForSeconds(0.5f);
+        } while (teamIsAlive);
+
+        view.RPC("AnyoneAreLoose", PhotonTargets.All, null);
+        yield break;
     }
 
     private void Update()
     {
-        if(!teamIsAlive && !isGameOver)
+        if (PhotonNetwork.inRoom)
         {
-            view.RPC("AnyoneAreLoose", PhotonTargets.All, null);
-            isGameOver = true;
-        }
 
-        if (selectedWorm != null)
-        {
-            if (arrow != null)
+            if (selectedWorm != null)
             {
-                if(arrow.activeSelf)
-                    arrow.transform.position = selectedWorm.transform.position + Vector3.up * 0.3f;
+                if (arrow != null)
+                {
+                    if (arrow.activeSelf)
+                        arrow.transform.position = selectedWorm.transform.position + Vector3.up * 0.3f;
+                    else
+                        arrow.SetActive(true);
+                }
+
+                if (playerTurn != null && playerTurn != viewCamera.owner)
+                {
+                    viewCamera.TransferOwnership(playerTurn.ID);
+                }
+                if (localWormsPC[indexSelectWorms].isAlive)
+                    camera.transform.position = new Vector3(selectedWorm.transform.position.x, selectedWorm.transform.position.y, camera.transform.position.z);
                 else
-                    arrow.SetActive(true);
+                {
+                    camera.transform.position = Vector3.forward * -10.0f;
+
+                    view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
+                }
             }
 
-            if (playerTurn != null && playerTurn != viewCamera.owner)
+            if (PhotonNetwork.player == playerTurn && teamIsAlive)
             {
-                viewCamera.TransferOwnership(playerTurn.ID);
-            }
-            if (localWormsPC[indexSelectWorms].isAlive)
-                camera.transform.position = new Vector3(selectedWorm.transform.position.x, selectedWorm.transform.position.y, camera.transform.position.z);
-            else
-            {
-                camera.transform.position = Vector3.forward * -10.0f;
 
-                view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
-            }
-        }
+                switch (phase)
+                {
+                    case GamePhase.Debut:
+                        timerSelection = maxTimerSelect;
+                        timerAction = maxTimerAction;
 
-        if (PhotonNetwork.player == playerTurn)
-        {
-
-            switch (phase)
-            {
-                case GamePhase.Debut:
-                    timerSelection = maxTimerSelect;
-                    timerAction = maxTimerAction;
-
-                    phase = GamePhase.SelectionWorm;
-                    break;
-                case GamePhase.SelectionWorm:
-                    if (timerSelection >= 0.0f)
-                    {
-                        timerSelection -= Time.deltaTime;
-                        if (localWormsPC.Count > 0)
+                        phase = GamePhase.SelectionWorm;
+                        break;
+                    case GamePhase.SelectionWorm:
+                        if (timerSelection >= 0.0f)
                         {
-                            int maxWorms = (int)NetManager.hashSet["NbrWorms"];
-
-                            if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow) && indexSelectWorms < maxWorms)
+                            timerSelection -= Time.deltaTime;
+                            if (localWormsPC.Count > 0)
                             {
-                                indexSelectWorms = ++indexSelectWorms % maxWorms;
+                                int maxWorms = (int)NetManager.hashSet["NbrWorms"];
 
-                            }
-                            else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) && indexSelectWorms > 0)
-                            {
-                                indexSelectWorms = --indexSelectWorms % maxWorms;
-
-                            }
-
-                            do
-                            {
-                                if (localWormsPC[indexSelectWorms].isAlive)
-                                {
-                                    selectedWorm = localWormsPC[indexSelectWorms].gameObject;
-                                }
-                                else
+                                if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow) && indexSelectWorms < maxWorms)
                                 {
                                     indexSelectWorms = ++indexSelectWorms % maxWorms;
+
+                                }
+                                else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) && indexSelectWorms > 0)
+                                {
+                                    indexSelectWorms = --indexSelectWorms % maxWorms;
+
                                 }
 
-                            } while (selectedWorm == null && teamIsAlive);
+                                do
+                                {
+                                    if (localWormsPC[indexSelectWorms].isAlive)
+                                    {
+                                        selectedWorm = localWormsPC[indexSelectWorms].gameObject;
+                                    }
+                                    else
+                                    {
+                                        indexSelectWorms = ++indexSelectWorms % maxWorms;
+                                    }
 
-                            if (arrow == null)
-                                arrow = Instantiate(Resources.Load("GreenArrow"), selectedWorm.transform.position + Vector3.up * 0.3f, Quaternion.identity) as GameObject;
+                                } while (selectedWorm == null);
 
-                        }
-                    }
-                    else
-                    {
-                        phase = GamePhase.Action;
-                    }
+                                if (arrow == null)
+                                    arrow = Instantiate(Resources.Load("GreenArrow"), selectedWorm.transform.position + Vector3.up * 0.3f, Quaternion.identity) as GameObject;
 
-                    break;
-                case GamePhase.Action:
-                    if (timerAction >= 0.0f)
-                    {
-                        timerAction -= Time.deltaTime;
-                        
-                        if (!localWormsPC[indexSelectWorms].isControledWorms)
-                        {
-                            localWormsPC[indexSelectWorms].isControledWorms = true;
+                            }
                         }
                         else
                         {
-                            if (localWormsPC[indexSelectWorms].isOnFire)
-                            {
-                                wasShoot = true;
-                            }
-                            if (!localWormsPC[indexSelectWorms].isOnFire && wasShoot)
-                            {
-                                wasShoot = false;
+                            phase = GamePhase.Action;
+                        }
 
-                                view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
+                        break;
+                    case GamePhase.Action:
+                        if (timerAction >= 0.0f)
+                        {
+                            timerAction -= Time.deltaTime;
+
+                            if (!localWormsPC[indexSelectWorms].isControledWorms)
+                            {
+                                localWormsPC[indexSelectWorms].isControledWorms = true;
+                            }
+                            else
+                            {
+                                if (localWormsPC[indexSelectWorms].isOnFire)
+                                {
+                                    wasShoot = true;
+                                }
+                                if (!localWormsPC[indexSelectWorms].isOnFire && wasShoot)
+                                {
+                                    wasShoot = false;
+
+                                    view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
-                    }
-                    break;
-                case GamePhase.Fin:
-                    selectedWorm = null;
-                    indexSelectWorms = 0;
-                    idPlayerToPlay = ++idPlayerToPlay % nbrTeamAlive;
+                        else
+                        {
+                            view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Fin);
+                        }
+                        break;
+                    case GamePhase.Fin:
+                        selectedWorm = null;
+                        indexSelectWorms = 0;
+                        idPlayerToPlay = ++idPlayerToPlay % nbrTeamAlive;
 
-                    view.RPC("NextPlayerTurn", PhotonTargets.MasterClient, idPlayerToPlay);
+                        view.RPC("NextPlayerTurn", PhotonTargets.MasterClient, idPlayerToPlay);
 
-                    view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Debut);
+                        view.RPC("NextPhase", PhotonTargets.AllBuffered, GamePhase.Debut);
 
-                    break;
+                        break;
+                }
             }
-        }
-        else
-        {
-            if (arrow != null && arrow.activeSelf)
-                arrow.SetActive(false);
+            else
+            {
+                if (arrow != null && arrow.activeSelf)
+                    arrow.SetActive(false);
+            }
         }
     }
 
@@ -289,7 +287,8 @@ public class GameManager : MonoBehaviour {
     [PunRPC]
     public void AnyoneAreLoose()
     {
-        nbrTeamAlive--;
+        if(nbrTeamAlive > 1)
+            nbrTeamAlive--;
     }
 
     #endregion

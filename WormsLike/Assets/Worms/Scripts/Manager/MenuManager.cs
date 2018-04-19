@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour {
 
-    GameObject Panel_Co_Serv;
+    public GameObject Panel_Co_Serv;
 
-    GameObject Panel_Co_Room;
-    Text textPlayerName;
+    public GameObject Panel_Co_Room;
+    public Text textPlayerName;
 
-    GameObject Panel_Room;
-    GameObject TextWormsTeam;
-    GameObject DropDownWormsTeam;
+    public GameObject Panel_Room;
+    public GameObject TextWormsTeam;
+    public GameObject DropDownWormsTeam;
 
-    GameObject Panel_Option;
+    public GameObject Panel_Option;
 
     public NetworkManager NetManager;
 

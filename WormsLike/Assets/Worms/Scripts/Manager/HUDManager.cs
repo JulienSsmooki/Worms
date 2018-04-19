@@ -73,7 +73,7 @@ public class HUDManager : MonoBehaviour {
                 textPhase.gameObject.SetActive(false);
         }
 
-        if(gm.nbrTeamAlive == 1)
+        if(gm.nbrTeamAlive == 1 || (gm.playerTurn != null && gm.playerTurn.IsInactive))
         {
             timerDisconnect += Time.deltaTime;
             if (gm.teamIsAlive)
@@ -86,7 +86,7 @@ public class HUDManager : MonoBehaviour {
             }
         }
 
-        if (timerDisconnect > 5.0f)
+        if (timerDisconnect > 2.0f && PhotonNetwork.inRoom)
             PhotonNetwork.LeaveRoom();
     }
 
