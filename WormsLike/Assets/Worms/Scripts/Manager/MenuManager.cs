@@ -18,6 +18,8 @@ public class MenuManager : MonoBehaviour {
 
     public NetworkManager NetManager;
 
+    public List<GameObject> imageMaps = new List<GameObject>();
+
     private void Awake()
     {
         NetManager = FindObjectOfType<NetworkManager>();
@@ -87,12 +89,17 @@ public class MenuManager : MonoBehaviour {
     }
     
 
-    public void Active_Worms()
+    public void Active_Worms(bool activated)
     {
-        TextWormsTeam.SetActive(true);
-        DropDownWormsTeam.SetActive(true);
+        TextWormsTeam.SetActive(activated);
+        DropDownWormsTeam.SetActive(activated);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    
     public void Connect()
     {
         NetManager.Connect();
@@ -113,8 +120,15 @@ public class MenuManager : MonoBehaviour {
         NetManager.SetWPT(change);
     }
 
+    public void SetMapName(Dropdown change)
+    {
+        NetManager.SetMapName(change);
+        Active_Image_Map(change.value);
+    }
+
     public void BackToLobby()
     {
+        Active_Worms(false);
         NetManager.BackToLobby();
     }
 
@@ -123,4 +137,14 @@ public class MenuManager : MonoBehaviour {
         NetManager.BackToConnect();
     }
 
+
+    private void Active_Image_Map(int numMap)
+    {
+        foreach (GameObject image in imageMaps)
+        {
+            image.SetActive(false);
+        }
+        imageMaps[numMap].SetActive(true);
+        imageMaps[numMap + 4].SetActive(true);
+    }
 }

@@ -24,6 +24,10 @@ public class HUDManager : MonoBehaviour {
 
     float timerDisconnect = 0.0f;
 
+    Color[] tabColorPlayer = new Color[] { Color.black, Color.blue, Color.red, Color.yellow };
+
+    bool isSetUpColorWorms = false;
+
     #endregion
 
 
@@ -37,10 +41,25 @@ public class HUDManager : MonoBehaviour {
     private void Start()
     {
         textToG.text = "ToG : " + NetManager.ToG.ToString().Substring(1) + " | Player : " + PhotonNetwork.player.NickName;
+
+        textToG.color = tabColorPlayer[PhotonNetwork.player.ID - 1];
+        textPlayerTurn.color = tabColorPlayer[PhotonNetwork.player.ID - 1];
+        textPhase.color = tabColorPlayer[PhotonNetwork.player.ID - 1];
+        textTimerPhase.color = tabColorPlayer[PhotonNetwork.player.ID - 1];
+        
     }
 
     private void Update()
     {
+        if(gm.localWormsPC.Count > 0 && !isSetUpColorWorms)
+        {
+            foreach (PlayerController pc in gm.localWormsPC)
+            {
+                pc.lifeText.color = tabColorPlayer[PhotonNetwork.player.ID - 1];
+            }
+            isSetUpColorWorms = true;
+        }
+
         textPlayerTurn.text = "Player Turn : " + gm.playerTurn;
         if (gm.playerTurn == PhotonNetwork.player)
         {

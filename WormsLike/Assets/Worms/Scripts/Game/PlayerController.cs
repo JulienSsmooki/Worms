@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
     public Text lifeText;
     public GameObject feedTarget;
+    public Missile missileScript;
     #endregion
     
 
@@ -30,7 +31,6 @@ public class PlayerController : MonoBehaviour {
     Vector2 velocity = Vector2.zero;
     bool isGrounded = false;
     
-    Missile missileScript;
     Vector3 dirMouse = Vector3.zero;
     float shootForce = 1.0f;
 
@@ -56,8 +56,11 @@ public class PlayerController : MonoBehaviour {
             //Fire
             if(Input.GetButton("Jump"))
             {
+                if(rb2D.bodyType == RigidbodyType2D.Dynamic)
+                    rb2D.bodyType = RigidbodyType2D.Static;
+
                 if (shootForce < 10.0f)
-                    shootForce += Time.deltaTime * 2.5f;
+                    shootForce += Time.deltaTime * 1.5f;
                 else
                     shootForce = 10.0f;
 
@@ -90,11 +93,26 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
+                if (rb2D.bodyType == RigidbodyType2D.Static)
+                    rb2D.bodyType = RigidbodyType2D.Dynamic;
+
 
                 Vector2 moveX = Vector2.zero;
                 moveX.x = Input.GetAxis("Horizontal") * scaleDeplacement * Time.deltaTime + rb2D.position.x;
 
-                if (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
+                Debug.DrawLine(transform.position, transform.position - transform.up, Color.red, 1.0f);
+                RaycastHit2D hit;
+                hit = Physics2D.BoxCast(transform.position - (Vector3.up * 0.115f), new Vector2(0.2f,0.01f), 0.0f, - transform.up, 0.0f);
+                if (hit.collider != null)
+                {
+                    isGrounded = true;
+                }
+                else
+                {
+                    isGrounded = false;
+                }
+
+                if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
                 {
                     velocity.y = 1.0f;
                 }
@@ -116,7 +134,6 @@ public class PlayerController : MonoBehaviour {
                         missileScript.rb2D.bodyType = RigidbodyType2D.Dynamic;
                         missileScript.col2D.enabled = true;
                         missileScript.Launch();
-                        missileScript = null;
                     }
                     feedTarget.SetActive(false);
                     isOnFire = false;
@@ -137,20 +154,7 @@ public class PlayerController : MonoBehaviour {
             GM.StartCoroutine(GM.WormsAreYouAlive());
         }
     }
-
     
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        if(Vector2.Dot( -transform.up, coll.contacts[0].point) > 0)
-            isGrounded = true;
-    }
-
-    void OnCollisionExit2D(Collision2D coll)
-    {
-        isGrounded = false;
-    }
-
     #endregion
 
 

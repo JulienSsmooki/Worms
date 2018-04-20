@@ -22,11 +22,14 @@ public class NetworkManager : Photon.PunBehaviour
     public byte maxPlayersPerRoom = 4;
 
     public TypeOfGame ToG = TypeOfGame._1vs1;
+    public string mapName = "Garden";
 
     public List<Text> listPlayerName = new List<Text>();
 
     public Text textTimerBeforeLaunch;
     public Text textRoomName;
+
+    public ConnectParticle connectParticle;
 
     public Hashtable hashSet;
 
@@ -115,7 +118,7 @@ public class NetworkManager : Photon.PunBehaviour
 
                 if (timerBeforeLaunch <= 0.0f)
                 {
-                    PhotonNetwork.LoadLevel("GameRoom" + (int)ToG);
+                    PhotonNetwork.LoadLevel(mapName + (int)ToG);
                 }
             }
             else
@@ -134,9 +137,7 @@ public class NetworkManager : Photon.PunBehaviour
     public void Connect()
     {
         isConnecting = true;
-
-        controlPanel.Active_Co_Room();
-
+        connectParticle.StartWaitingAnimation();
         PhotonNetwork.ConnectUsingSettings(gameVersion);
         
     }
@@ -161,6 +162,7 @@ public class NetworkManager : Photon.PunBehaviour
                
                 hashSet = new Hashtable();
                 hashSet["TypeOfGame"] = ToG;
+                hashSet["MapName"] = mapName;
                 hashSet["NbrWorms"] = NbrWormsPT;
                 hashSet["PlayerName1"] = "";
                 hashSet["PlayerName2"] = "";
@@ -169,10 +171,10 @@ public class NetworkManager : Photon.PunBehaviour
 
                 option.CustomRoomProperties = hashSet;
 
-                string[] lobbyProps = { "TypeOfGame", "PlayerName1", "PlayerName2", "PlayerName3", "PlayerName4" };
+                string[] lobbyProps = { "TypeOfGame", "MapName", "NbrWorms", "PlayerName1", "PlayerName2", "PlayerName3", "PlayerName4" };
                 option.CustomRoomPropertiesForLobby = lobbyProps;
 
-                PhotonNetwork.CreateRoom(ToG.ToString() + " | Game n°" + PhotonNetwork.countOfRooms, option, TypedLobby.Default);
+                PhotonNetwork.CreateRoom(ToG.ToString() + " | " + mapName +" n°" + PhotonNetwork.countOfRooms, option, TypedLobby.Default);
             }
 
             controlPanel.Active_Room();
@@ -186,7 +188,7 @@ public class NetworkManager : Photon.PunBehaviour
         RoomInfo[] roomInfos = PhotonNetwork.GetRoomList();
         foreach (RoomInfo info in roomInfos)
         {
-            if((TypeOfGame)info.CustomProperties["TypeOfGame"] == ToG)
+            if((TypeOfGame)info.CustomProperties["TypeOfGame"] == ToG && (string)info.CustomProperties["MapName"] == mapName)
             {
                 listNameRoomOpenOfType.Add(info.Name);
             }
@@ -205,7 +207,12 @@ public class NetworkManager : Photon.PunBehaviour
         hashSet["NbrWorms"] = NbrWormsPT;
         PhotonNetwork.room.SetCustomProperties(hashSet);
     }
-    
+
+    public void SetMapName(Dropdown change)
+    {
+        mapName = change.options[change.value].text;
+    }
+
     public void BackToLobby()
     {
         if(PhotonNetwork.LeaveRoom())
@@ -220,27 +227,26 @@ public class NetworkManager : Photon.PunBehaviour
             controlPanel.Active_Co_Serv();
         }
     }
-    
+
     #endregion
 
 
 
     #region Photon.PunBehaviour CallBacks
 
-    public override void OnConnectedToMaster()
+    public override void OnConnectedToPhoton()
     {
-        
-        if (isConnecting)
-        {
-        }
+        base.OnConnectedToPhoton();
+
+        controlPanel.Active_Co_Room();
+
+        connectParticle.StopWaitingAnimation();
     }
-    
+
     public override void OnDisconnectedFromPhoton()
     {
         isConnecting = false;
-
         
-
     }
     
     public override void OnJoinedRoom()
@@ -262,7 +268,7 @@ public class NetworkManager : Photon.PunBehaviour
         }
 
         if (PhotonNetwork.isMasterClient)
-            controlPanel.Active_Worms();
+            controlPanel.Active_Worms(true);
 
     }
 
