@@ -1,6 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+* @JulienLopez
+* @Missile.cs
+* @Le script s'attache sur le GameObject du missile.
+*   - Permet de gerer le missile créer par un worm.
+*/
 
 public class Missile : MonoBehaviour {
 
@@ -12,6 +17,8 @@ public class Missile : MonoBehaviour {
     public Rigidbody2D rb2D;
     public BoxCollider2D col2D;
     public PhotonView view;
+
+    public PlayerController launcher;
     #endregion
 
 
@@ -23,6 +30,17 @@ public class Missile : MonoBehaviour {
 
 
     #region MonoBehaviour CallBacks
+    private void OnDestroy()
+    {
+        //Cas où le missile est détruit à la fin du timer
+        if (launcher != null)
+        {
+            //Désactive tout ce qui est liée au tir
+            launcher.isOnFire = false;
+            launcher.feedTarget.SetActive(false);
+        }
+    }
+
 
     private void Awake()
     {
@@ -34,13 +52,18 @@ public class Missile : MonoBehaviour {
 
     private void Update()
     {
-        if(rb2D.velocity.magnitude > 0.0f)
+        if(rb2D.velocity.magnitude > 0.0f)//Update de la rotation lors du parcours du missil en l'air
         {
             Quaternion rot = Quaternion.LookRotation(transform.forward, new Vector3(transform.forward.x + rb2D.velocity.x, transform.forward.y + rb2D.velocity.y, 0.0f));
             transform.rotation = rot;
         }
     }
 
+    /// <summary>
+    /// Set la direction et la puissance du missile.
+    /// </summary>
+    /// <param name="_dir"></param>
+    /// <param name="_pui"></param>
     public void SetDirPui(Vector3 _dir, float _pui)
     {
         direction = _dir;
@@ -50,12 +73,20 @@ public class Missile : MonoBehaviour {
         transform.rotation = rot;
     }
 
+    /// <summary>
+    /// Lance le missile.
+    /// </summary>
     public void Launch()
     {
         direction.Normalize();
         rb2D.velocity = direction * puissance;
     }
 
+    /// <summary>
+    /// Collision avec le terrain envoie la position exact à tout les joueurs pour amputé
+    /// le terrain de manière déterministe.
+    /// </summary>
+    /// <param name="coll"></param>
     void OnCollisionEnter2D(Collision2D coll)
     {
         if(coll.gameObject.tag == "Ground")
@@ -66,7 +97,18 @@ public class Missile : MonoBehaviour {
 
         }
     }
-    
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Test si un worms se trouve dans le rayon d'impact du missile.
+    /// Si oui => perte de vie.
+    /// </summary>
+    /// <param name="_impactPoint"></param>
+    /// <param name="_pixelsPerUnit"></param>
     public void TutchingWorms(Vector3 _impactPoint, float _pixelsPerUnit)
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(_impactPoint.x,_impactPoint.y), 70.0f / _pixelsPerUnit);
@@ -77,13 +119,13 @@ public class Missile : MonoBehaviour {
                 if (collider.gameObject.tag == "Player")
                 {
                     PlayerController pc = collider.gameObject.GetComponent<PlayerController>();
-                    if(Vector3.Magnitude(collider.gameObject.transform.position - _impactPoint) < ((70.0f / _pixelsPerUnit)/ 2.0f)) //Impacte proche
+                    if(Vector3.Magnitude(collider.gameObject.transform.position - _impactPoint) < (70.0f / _pixelsPerUnit)) //Impacte proche
                     {
-                        pc.lifePoint -= 50.0f;
+                        pc.lifePoint -= (0.7f - Vector3.Magnitude(collider.gameObject.transform.position - _impactPoint)) * 100.0f;
                     }
-                    else //Impact éloigné
+                    if(pc.lifePoint < 0.0f)
                     {
-                        pc.lifePoint -= 25.0f;
+                        pc.lifePoint = 0.0f;
                     }
                 }
             }
@@ -94,12 +136,14 @@ public class Missile : MonoBehaviour {
 
 
     #region Photon.PunBehaviour RPCs
-
+    /// <summary>
+    /// RPC : Destruction du terrain à un point précis.
+    /// </summary>
+    /// <param name="_impactPoint"></param>
     [PunRPC]
     private void UpdateTexture(Vector3 _impactPoint)
     {
-        Destroy(terrain.GetComponent<PolygonCollider2D>());
-
+        //Récupere le terrain et la position de l'impact
         Sprite spriteTerrain = terrain.GetComponent<SpriteRenderer>().sprite;
 
         Texture2D tex = spriteTerrain.texture;
@@ -113,6 +157,7 @@ public class Missile : MonoBehaviour {
 
         TutchingWorms(_impactPoint, spriteTerrain.pixelsPerUnit);
 
+        //Détruit le terrain
         int offset = 80;
         for (int Y = (int)pos.y - offset; Y < (int)pos.y + offset; Y++)
         {
@@ -133,12 +178,15 @@ public class Missile : MonoBehaviour {
         }
         tex.Apply();
 
+        //Update le collider
+        Destroy(terrain.GetComponent<PolygonCollider2D>());
         terrain.AddComponent<PolygonCollider2D>();
 
+        //Détruit le missile
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.velocity = Vector2.zero;
         Destroy(gameObject);
     }
-
+    
     #endregion
 }

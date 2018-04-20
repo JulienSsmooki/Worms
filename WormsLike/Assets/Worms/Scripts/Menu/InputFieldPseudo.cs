@@ -1,7 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+
+/*
+* @JulienLopez
+* @InputFieldPseudo.cs
+* @Le script s'attache sur un InputFiled.
+*   - Permet de gerer le pseudo du joueur et le référencer à Photon
+*/
 
 [RequireComponent(typeof(InputField))]
 public class InputFieldPseudo : MonoBehaviour {
@@ -25,6 +30,10 @@ public class InputFieldPseudo : MonoBehaviour {
         PhotonNetwork.playerName = defaultName;
     }
 
+    /// <summary>
+    /// Set le pseudo du joueur à Photon.
+    /// </summary>
+    /// <param name="value"></param>
     public void SetPlayerName(string value)
     {
         PhotonNetwork.playerName = value + " ";

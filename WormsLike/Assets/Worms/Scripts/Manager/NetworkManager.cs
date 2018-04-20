@@ -1,13 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 using Random = UnityEngine.Random;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-using System.Linq;
 
+/*
+* @JulienLopez
+* @NetworkManager.cs
+* @Le script s'attache sur un gameObject vide et créer par un autre script (ne doit pas se trouver dans la scène).
+*   - Permet de gerer la connexion/deconnexion à Photon
+*/
+
+/// <summary>
+/// Enum du type de partie
+/// </summary>
 public enum TypeOfGame
 {
     _1vs1 = 2,
@@ -36,25 +44,21 @@ public class NetworkManager : Photon.PunBehaviour
     public bool isGameStarted = false;
     public int NbrWormsPT = 1;
     #endregion
-
-
+    
 
     #region Private Variables
     MenuManager controlPanel;
-    
-    bool isConnecting;
     
     string gameVersion = "1";
 
     List<string> listNameRoomOpenOfType = new List<string>();
 
-    float timerBeforeLaunch = 1.0f;
+    float timerBeforeLaunch = 4.0f;
         
     string playername = "PlayerName";
     
     #endregion
-
-
+    
 
     #region MonoBehaviour CallBacks
 
@@ -75,7 +79,7 @@ public class NetworkManager : Photon.PunBehaviour
             isGameStarted = true;
             listPlayerName.RemoveRange(0, listPlayerName.Count);
         }
-        else
+        else //Is in menu
         {
             controlPanel = FindObjectOfType<MenuManager>();
         }
@@ -83,10 +87,12 @@ public class NetworkManager : Photon.PunBehaviour
 
     void Update()
     {
+        //Update le panel du lobby en room
         if (PhotonNetwork.inRoom && !isGameStarted)
         {
             hashSet = PhotonNetwork.room.CustomProperties;
 
+            //Update des joueurs dans le lobby
             for (int i = 1; i < 5; i++)
             {
                 if (i < PhotonNetwork.room.PlayerCount + 1)
@@ -107,6 +113,7 @@ public class NetworkManager : Photon.PunBehaviour
                 }
             }
 
+            //Lance la partie
             if (PhotonNetwork.room.PlayerCount == (int)ToG)
             {
                 if (timerBeforeLaunch > 0.0f)
@@ -123,25 +130,29 @@ public class NetworkManager : Photon.PunBehaviour
             }
             else
             {
-                timerBeforeLaunch = 1.0f;
-                textTimerBeforeLaunch.text = "Time before starting : XX";
+                //Le lobby n'es pas encore plein
+                timerBeforeLaunch = 4.0f;
+                textTimerBeforeLaunch.text = "Time before starting : Waiting for players (" + ((int)ToG - PhotonNetwork.room.PlayerCount) + " left)";
             }
         }
     }
     #endregion
-
-
+    
 
     #region Public Methods
-
+    /// <summary>
+    /// Connexion au serveur
+    /// </summary>
     public void Connect()
     {
-        isConnecting = true;
         connectParticle.StartWaitingAnimation();
         PhotonNetwork.ConnectUsingSettings(gameVersion);
         
     }
 
+    /// <summary>
+    /// Connection à une room
+    /// </summary>
     public void SearchGame()
     {
         UpdateListRoom();
@@ -177,10 +188,12 @@ public class NetworkManager : Photon.PunBehaviour
                 PhotonNetwork.CreateRoom(ToG.ToString() + " | " + mapName +" n°" + PhotonNetwork.countOfRooms, option, TypedLobby.Default);
             }
 
-            controlPanel.Active_Room();
         }
     }
 
+    /// <summary>
+    /// Update la liste des rooms disponible avec les paramètres voulu
+    /// </summary>
     void UpdateListRoom()
     {
         listNameRoomOpenOfType.RemoveRange(0, listNameRoomOpenOfType.Count);
@@ -195,11 +208,19 @@ public class NetworkManager : Photon.PunBehaviour
         }
     }
     
+    /// <summary>
+    /// Set le type de partie
+    /// </summary>
+    /// <param name="change"></param>
     public void SetToG(Dropdown change)
     {
         ToG = (TypeOfGame)(change.value + 2);
     }
 
+    /// <summary>
+    /// Set le nomdre de worms par team
+    /// </summary>
+    /// <param name="change"></param>
     public void SetWPT(Dropdown change)
     {
         NbrWormsPT = int.Parse(change.options[change.value].text);
@@ -208,17 +229,27 @@ public class NetworkManager : Photon.PunBehaviour
         PhotonNetwork.room.SetCustomProperties(hashSet);
     }
 
+    /// <summary>
+    /// Set le nom de la map à charger
+    /// </summary>
+    /// <param name="change"></param>
     public void SetMapName(Dropdown change)
     {
         mapName = change.options[change.value].text;
     }
 
+    /// <summary>
+    /// Déconnexion de la room
+    /// </summary>
     public void BackToLobby()
     {
         if(PhotonNetwork.LeaveRoom())
             controlPanel.Active_Co_Room();
     }
 
+    /// <summary>
+    /// Déconnexion du serveur
+    /// </summary>
     public void BackToConnect()
     {
         if (PhotonNetwork.LeaveLobby())
@@ -229,11 +260,13 @@ public class NetworkManager : Photon.PunBehaviour
     }
 
     #endregion
-
-
+    
 
     #region Photon.PunBehaviour CallBacks
 
+    /// <summary>
+    /// Connecté au serveur
+    /// </summary>
     public override void OnConnectedToPhoton()
     {
         base.OnConnectedToPhoton();
@@ -242,13 +275,10 @@ public class NetworkManager : Photon.PunBehaviour
 
         connectParticle.StopWaitingAnimation();
     }
-
-    public override void OnDisconnectedFromPhoton()
-    {
-        isConnecting = false;
-        
-    }
     
+    /// <summary>
+    /// Connecté à une room
+    /// </summary>
     public override void OnJoinedRoom()
     {
         textRoomName.text = PhotonNetwork.room.Name.Substring(1);
@@ -266,12 +296,18 @@ public class NetworkManager : Photon.PunBehaviour
 
             PhotonNetwork.room.SetCustomProperties(hashSet);
         }
+        
+        controlPanel.Active_Room();
 
         if (PhotonNetwork.isMasterClient)
             controlPanel.Active_Worms(true);
 
     }
 
+    /// <summary>
+    /// Un nouveau joueur c'est connecté à la room
+    /// </summary>
+    /// <param name="newPlayer"></param>
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
         base.OnPhotonPlayerConnected(newPlayer);
@@ -290,6 +326,10 @@ public class NetworkManager : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// Un joueur c'est déconnecté de la room
+    /// </summary>
+    /// <param name="otherPlayer"></param>
     public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
     {
         base.OnPhotonPlayerDisconnected(otherPlayer);
@@ -314,6 +354,9 @@ public class NetworkManager : Photon.PunBehaviour
         }
     }
 
+    /// <summary>
+    /// Lors de la sortie d'une room => retour au menu
+    /// </summary>
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
